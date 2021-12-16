@@ -6,12 +6,13 @@ async function searchGif(term) {
 	const resSize = res.data.data.length;
 	if (resSize !== 0) {
 		const index = Math.floor(Math.random() * resSize);
-		console.log(res.data.data[index].images.original.url);
+		//console.log(res.data.data[index].images.original.url);
 		const gifURL = res.data.data[index].images.original.url;
 		appendGif(gifURL);
 	} else {
 		alert('Gif Not Found!');
 	}
+	$('#searchTerm').val('');
 }
 
 function addGif(event) {
@@ -21,8 +22,10 @@ function addGif(event) {
 }
 
 function appendGif(url) {
-	$('.results').append(`<img src=${url} class='gif' alt="this is a gif">`);
-	$('#searchTerm').attr('value', '');
+	let newDiv = $('<div class="col-md-4 col-12 mb-4"></div>');
+	let newGif = $(`<img src=${url} class='gif w-100' alt="this is a gif">`);
+	newDiv.append(newGif);
+	$('#results').append(newDiv);
 }
 
 function removeGif() {
